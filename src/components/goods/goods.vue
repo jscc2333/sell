@@ -1,6 +1,7 @@
 <template>
     <div>
-        i am goods
+        <div class="menu-wrapper"></div>
+        <div class=""></div>
     </div>
 </template>
 

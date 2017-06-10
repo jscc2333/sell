@@ -13,7 +13,7 @@
           {{seller.description}}/{{seller.deliveryTime}}分钟后送达
         </div>
         <div class="support" v-if="seller.supports" @click="showDetail()">
-          <span class="icon" :class="classMap[seller.supports[0].type]"></span>
+          <icon :type="seller.supports[0].type"></icon>
           <span class="text">{{seller.supports[0].description}}</span>
         </div>
       </div>
@@ -45,7 +45,7 @@
             </div>
             <ul v-if="seller.supports" class="supports">
               <li class="supports-item" v-for="(item,index) in seller.supports">
-                <span class="icon" :class="classMap[seller.supports[index].type]"></span>
+                <icon :type="seller.supports[index].type"></icon>
                 <span class="text">{{seller.supports[index].description}}</span>
               </li>
             </ul>
@@ -70,6 +70,7 @@
  
 <script type="text/ecmascript-6">
 import star from '../star/star';
+import icon from '../icon/icon';
 
 export default {
   data() {
@@ -94,7 +95,8 @@ export default {
     }
   },
   components: {
-    star: star
+    star: star,
+    icon: icon
   }
 };
 </script>
@@ -145,30 +147,6 @@ export default {
         font-size: 12px;
       }
       .support {
-        .icon {
-          display: inline-block;
-          vertical-align: top;
-          width: 12px;
-          height: 12px;
-          margin-right: 4px;
-          background-size: 12px 12px;
-          background-repeat: no-repeat;
-          &.decrease {
-            .bg-image('decrease_1', 'header');
-          }
-          &.discount {
-            .bg-image('discount_1', 'header');
-          }
-          &.guarantee {
-            .bg-image('guarantee_1', 'header');
-          }
-          &.invoice {
-            .bg-image('invoice_1', 'header');
-          }
-          &.special {
-            .bg-image('special_1', 'header');
-          }
-        }
         .text {
           line-height: 12px;
           font-size: 10px;
@@ -298,30 +276,6 @@ export default {
             font-size: 0;
             &:last-child {
               margin-bottom: 0;
-            }
-            .icon {
-              display: inline-block;
-              width: 16px;
-              height: 16px;
-              vertical-align: top;
-              margin-right: 6px;
-              background-size: 16px 16px;
-              background-repeat: no-repeat;
-              &.decrease {
-                .bg-image('decrease_2', 'header');
-              }
-              &.discount {
-                .bg-image('discount_2', 'header');
-              }
-              &.guarantee {
-                .bg-image('guarantee_2', 'header');
-              }
-              &.invoice {
-                .bg-image('invoice_2', 'header');
-              }
-              &.special {
-                .bg-image('special_2', 'header');
-              }
             }
             .text {
               line-height: 16px;
