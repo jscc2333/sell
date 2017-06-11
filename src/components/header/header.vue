@@ -13,7 +13,7 @@
           {{seller.description}}/{{seller.deliveryTime}}分钟后送达
         </div>
         <div class="support" v-if="seller.supports" @click="showDetail()">
-          <icon :type="seller.supports[0].type"></icon>
+          <icon :type="seller.supports[0].type" :size="1"></icon>
           <span class="text">{{seller.supports[0].description}}</span>
         </div>
       </div>
@@ -45,7 +45,7 @@
             </div>
             <ul v-if="seller.supports" class="supports">
               <li class="supports-item" v-for="(item,index) in seller.supports">
-                <icon :type="seller.supports[index].type"></icon>
+                <icon :type="seller.supports[index].type" :size="2"></icon>
                 <span class="text">{{seller.supports[index].description}}</span>
               </li>
             </ul>
@@ -82,9 +82,6 @@ export default {
     seller: {
       type: Object
     }
-  },
-  created() {
-    this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
   },
   methods: {
     showDetail() {

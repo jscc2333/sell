@@ -1,5 +1,6 @@
 <template>
-  <span :class="classMap[type]" class="icon"></span>
+  <span :class="[classMap[type]+size,'size'+size]" class="icon">
+  </span>
 </template>
 
 <script type="text/ecmascript-6">
@@ -7,10 +8,14 @@ export default {
   props: {
     type: {
       type: Number
+    },
+    size: {
+      type: Number
     }
   },
   created() {
     this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
+    console.log(this.size);
   }
 };
 </script>
@@ -20,26 +25,70 @@ export default {
 
 .icon {
   display: inline-block;
-  width: 16px;
-  height: 16px;
   vertical-align: top;
-  margin-right: 6px;
-  background-size: 16px 16px;
   background-repeat: no-repeat;
-  &.decrease {
-    .bg-image('decrease_2', 'header');
+  &.size1 {
+    width: 12px;
+    height: 12px;
+    margin-right: 4px;
+    background-size: 12px 12px;
+    &.decrease1 {
+      .bg-image('decrease_1', 'icon');
+    }
+    &.discount1 {
+      .bg-image('discount_1', 'icon');
+    }
+    &.guarantee1 {
+      .bg-image('guarantee_1', 'icon');
+    }
+    &.invoice1 {
+      .bg-image('invoice_1', 'icon');
+    }
+    &.special1 {
+      .bg-image('special_1', 'icon');
+    }
   }
-  &.discount {
-    .bg-image('discount_2', 'header');
+  &.size2 {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+    background-size: 16px 16px;
+    &.decrease2 {
+      .bg-image('decrease_2', 'icon');
+    }
+    &.discount2 {
+      .bg-image('discount_2', 'icon');
+    }
+    &.guarantee2 {
+      .bg-image('guarantee_2', 'icon');
+    }
+    &.invoice2 {
+      .bg-image('invoice_2', 'icon');
+    }
+    &.special2 {
+      .bg-image('special_2', 'icon');
+    }
   }
-  &.guarantee {
-    .bg-image('guarantee_2', 'header');
-  }
-  &.invoice {
-    .bg-image('invoice_2', 'header');
-  }
-  &.special {
-    .bg-image('special_2', 'header');
+  &.size3 {
+    width: 12px;
+    height: 12px;
+    margin-right: 4px;
+    background-size: 12px 12px;
+    &.decrease3 {
+      .bg-image('decrease_3', 'icon');
+    }
+    &.discount3 {
+      .bg-image('discount_3', 'icon');
+    }
+    &.guarantee3 {
+      .bg-image('guarantee_3', 'icon');
+    }
+    &.invoice3 {
+      .bg-image('invoice_3', 'icon');
+    }
+    &.special3 {
+      .bg-image('special_3', 'icon');
+    }
   }
 }
 </style>
