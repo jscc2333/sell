@@ -15,7 +15,6 @@ export default {
   },
   created() {
     this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
-    console.log(this.size);
   }
 };
 </script>
@@ -72,7 +71,7 @@ export default {
   &.size3 {
     width: 12px;
     height: 12px;
-    margin-right: 4px;
+    margin-right: 2px;
     background-size: 12px 12px;
     &.decrease3 {
       .bg-image('decrease_3', 'icon');

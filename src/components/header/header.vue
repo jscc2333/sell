@@ -108,7 +108,7 @@ export default {
   overflow: hidden;
   .content-wrapper {
     position: relative;
-    padding: 24px 12px 24px 18px;
+    padding: 24px 12px 18px 24px;
     font-size: 0;
     .avatar {
       display: inline-block;

@@ -11,7 +11,7 @@ import './common/less/index.less';
 /* eslint-disable no-new */
 
 // change the homepage to  specified page
-router.push('ratings');
+router.push('goods');
 
 Vue.use(VueResource);
 new Vue({
