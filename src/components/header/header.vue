@@ -44,7 +44,7 @@
               <div class="line"></div>
             </div>
             <ul v-if="seller.supports" class="supports">
-              <li class="supports-item" v-for="(item,index) in seller.supports">
+              <li class="supports-item" v-for="(item,index) in seller.supports" :key="index">
                 <icon :type="seller.supports[index].type" :size="2"></icon>
                 <span class="text">{{seller.supports[index].description}}</span>
               </li>
@@ -64,7 +64,6 @@
         </div>
       </div>
     </transition>
-  
   </div>
 </template>
  

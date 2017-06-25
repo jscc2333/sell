@@ -2,7 +2,7 @@
   <div class="goods">
     <div class="menu-wrapper" ref="menuWrapper">
       <ul>
-        <li v-for="(item,index) in goods" class="menu-item" :class="{'current':currentIndex===index}" @click="selectMenu(index,$event)">
+        <li v-for="(item,index) in goods" class="menu-item" :class="{'current':currentIndex===index}" @click="selectMenu(index,$event)" :key="index">
           <span class="text">
             <icon :type="item.type" v-show="item.type>0" :size="3"></icon>{{item.name}}
           </span>
@@ -11,10 +11,10 @@
     </div>
     <div class="foods-wrapper" ref="foodsWrapper">
       <ul>
-        <li v-for="item in goods" class="food-list food-list-hook">
+        <li v-for="(item,index) in goods" class="food-list food-list-hook" :key="index">
           <h1 class="title">{{item.name}}</h1>
           <ul>
-            <li v-for="food in item.foods" class="food-item">
+            <li v-for="(food,foodIndex) in item.foods" class="food-item" :key="foodIndex" @click="selectFood(food,$event)">
               <div class="icon">
                 <img :src="food.icon" width="57" height="57">
               </div>
@@ -30,7 +30,7 @@
                   <span v-show="food.oldPrice" class="old">{{food.oldPrice}}</span>
                 </div>
                 <div class="cartcontrol-wrapper">
-                  <cartcontrol :food="food"></cartcontrol>
+                  <cartcontrol :food="food" @cartIncrease="_drop"></cartcontrol>
                 </div>
               </div>
             </li>
@@ -38,7 +38,8 @@
         </li>
       </ul>
     </div>
-    <shopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice" :select-foods="selectFoods"></shopcart>
+    <shopcart ref="shopcart" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice" :select-foods="selectFoods"></shopcart>
+    <food :food="selectedFood" ref="food"></food>
   </div>
 </template>
 
@@ -46,6 +47,7 @@
 import icon from '../icon/icon';
 import shopcart from '../shopcart/shopcart';
 import cartcontrol from '../cartcontrol/cartcontrol';
+import food from '../food/food';
 import BScroll from 'better-scroll';
 
 const ERR_OK = 0;
@@ -60,10 +62,14 @@ export default {
     return {
       goods: [],
       listHeight: [],
-      scrollY: 0
+      scrollY: 0,
+      selectedFood: {}
     };
   },
   created() {
+    this.$root.eventHub.$on('cartIncrease', (target) => {
+      this._drop(target);
+    });
     this.$http.get('/api/goods').then((response) => {
       response = response.body;
       if (response.errno === ERR_OK) {
@@ -80,7 +86,8 @@ export default {
   components: {
     icon: icon,
     shopcart: shopcart,
-    cartcontrol: cartcontrol
+    cartcontrol: cartcontrol,
+    food: food
   },
   computed: {
     currentIndex() {
@@ -106,6 +113,9 @@ export default {
     }
   },
   methods: {
+    _drop(target) {
+      this.$refs.shopcart.drop(target);
+    },
     _initScroll() {
       this.menuScroll = new BScroll(this.$refs.menuWrapper, {
         click: true
@@ -137,6 +147,13 @@ export default {
       let foodList = this.$refs.foodsWrapper.getElementsByClassName('food-list-hook');
       let el = foodList[index];
       this.foodsScroll.scrollToElement(el, 500);
+    },
+    selectFood(food, event) {
+      if (!event._constructed) {
+        return;
+      }
+      this.selectedFood = food;
+      this.$refs.food.show();
     }
   }
 };
