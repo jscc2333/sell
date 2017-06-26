@@ -73,14 +73,14 @@ export default {
   },
   methods: {
     select(type, event) {
-      if (!event._constructed) {
+      if (!event._constructed && !event.isTrusted) {
         return;
       }
       this.d_selectType = type;
       this.$root.eventHub.$emit('ratingtypeSelect', type);
     },
     toggleContent(event) {
-      if (!event._constructed) {
+      if (!event._constructed && !event.isTrusted) {
         return;
       }
       this.d_onlyContent = !this.d_onlyContent;

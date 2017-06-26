@@ -89,5 +89,26 @@ export default {
       .bg-image('special_3', 'icon');
     }
   }
+   &.size4 {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+    background-size: 16px 16px;
+    &.decrease4 {
+      .bg-image('decrease_4', 'icon');
+    }
+    &.discount4 {
+      .bg-image('discount_4', 'icon');
+    }
+    &.guarantee4 {
+      .bg-image('guarantee_4', 'icon');
+    }
+    &.invoice4 {
+      .bg-image('invoice_4', 'icon');
+    }
+    &.special4 {
+      .bg-image('special_4', 'icon');
+    }
+  }
 }
 </style>
